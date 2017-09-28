@@ -1,0 +1,21 @@
+/** RADIUS server interface */
+module radius {
+
+    /** RADIUS auth type */
+    enumeration AuthType {
+        PAP,  ///< PAP
+        CHAP  ///< CHAP
+    };
+
+    /** Server settings */
+    structure ServerSettings {
+        string      id;            ///< This field is unused; empty on read, ignored on write
+        string      server;        ///< IP or name of the radius servers
+        string      sharedSecret;
+        int  	    udpAuthPort;
+        int  	    udpAccountPort;
+        int  	    timeout;
+        int  	    retries;
+        AuthType    authType;
+    };
+}

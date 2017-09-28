@@ -1,0 +1,50 @@
+/** Front panel display interface */
+module display {
+    /**
+     * Interface to control the device's front panel display
+     */
+    interface DisplayControl {
+	/**
+	 * Error codes
+	 */
+	constant int SUCCESS           = 0; ///< No error
+	constant int ERR_INVALID_VALUE = 1; ///< Invalid argument
+
+	/**
+	 * Representation of a possible default view
+	 */
+	structure DefaultViewItem {
+	    string id;			///< View ID
+	    string description;		///< Textual description
+	};
+
+	/**
+	 * Get available default views. This returns all views that can be
+	 * used as default views on the device display.
+	 *
+	 * @return Possible default views, or empty list if the default view
+	 *         can not be configured for the device's display
+	 */
+	vector<DefaultViewItem> getAvailableDefaultViews();
+
+	/**
+	 * Get the currently active default view.
+	 *
+	 * @return View ID of current default view.
+	 *         If the device doesn't allow configuration of
+	 *         the default view, an empty string is returned.
+	 */
+	string getDefaultView();
+
+	/**
+	 * Set the active default view.
+	 *
+	 * @param id  View ID of new default view
+	 *
+	 * @return 0 on success
+	 * @return 1 if id is not part of the key set returned by
+	 *           getAvailableDefaultViews
+	 */
+	int setDefaultView(in string id);
+    };
+}

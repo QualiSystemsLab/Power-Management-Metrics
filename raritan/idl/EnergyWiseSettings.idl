@@ -1,0 +1,17 @@
+#ifndef __ENERGYWISE_SETTINGS_IDL__
+#define __ENERGYWISE_SETTINGS_IDL__
+
+/** Cisco EnergyWise */
+module cew {
+
+    /** EnergyWise settings */
+    structure EnergyWiseSettings {
+	boolean	    enabled;         ///< Enabled
+	string	    domainName;      ///< Domain name
+	string	    secret;          ///< Secret
+	int	    port;            ///< Port
+	int	    pollingInterval; ///< Polling interval
+    };
+}
+
+#endif //__ENERGYWISE_SETTINGS_IDL__

@@ -13318,3 +13318,12 @@ Outlet Data Logging failure.  (u'21S01', u'[21S01] [Microsoft][ODBC SQL Server D
 2017-09-20 11:45:09,381:INFO:Processing svl290-gg09-cdu-1     2017-09-20 11:45:09
 2017-09-20 11:45:23,456:INFO:Processing svl290-gg04-cdu-1     2017-09-20 11:45:23
 2017-09-20 11:45:37,719:INFO:Processing svl290-gg04-cdu-1-slave1     2017-09-20 11:45:37
+2017-09-28 11:11:34,694:INFO:Connected to QualiEnv DB.
+2017-09-28 11:13:40,782:INFO:Connected to QualiEnv DB.
+2017-09-28 11:14:06,177:INFO:Connected to QualiEnv DB.
+2017-09-28 11:15:42,984:INFO:Connected to QualiEnv DB.
+2017-09-28 11:16:30,226:INFO:Connected to QualiEnv DB.
+2017-09-28 11:16:35,223:INFO:Connected to CloudShell @ svl-cs-app
+2017-09-28 11:16:35,461:INFO:Connected to QualiEnv DB.
+2017-09-28 11:16:35,533:INFO:Connected to CloudShell @ svl-cs-app
+2017-09-28 11:16:43,266:INFO:Processing svl290-gg11-cdu1-slave1     2017-09-28 11:16:43

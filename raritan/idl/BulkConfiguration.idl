@@ -1,0 +1,27 @@
+/** Bulk Configuration */
+module bulkcfg {
+
+    /** Bulk Configuration Interface */
+    interface BulkConfiguration {
+
+	/** Status of the last bulk configuration restore operation */
+	enumeration Status {
+	    UNKNOWN,		///< No bulk configuration was done yet
+	    UPLOAD_FAILED,	///< Uploading a bulk configuration failed
+	    RESTORE_PENDING,	///< Restore is pending
+	    RESTORE_OK,		///< Restoring bulk configuration successful
+	    RESTORE_FAILED	///< Restoring bulk configuration failed
+	};
+
+	/**
+	 * Retrieve the status of the last bulk configuration restore
+	 * operation.
+	 *
+	 * @param status     Result: Bulk configuration restore status
+	 * @param timeStamp  Result: Time of last restore operation
+	 */
+	void getStatus(out Status status, out time timeStamp);
+
+    };
+
+}

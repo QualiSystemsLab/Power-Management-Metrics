@@ -1,0 +1,219 @@
+#ifndef __PERIPHERAL_G2_PRODUCTION_IDL__
+#define __PERIPHERAL_G2_PRODUCTION_IDL__
+
+#include <PeripheralDeviceSlot.idl>
+
+module peripheral {
+    interface G2Production_3_0_0 {
+	constant int ERR_INVALID_PARAMS     	= 1;
+    	constant int ERR_NO_CONFIG_MODE     	= 2;
+	constant int ERR_NO_DEVICE  	    	= 3;
+	constant int ERR_NO_FIRMWARE_FILE   	= 4;
+	constant int ERR_FIRMWARE_INVALID	= 5;
+	constant int ERR_PROTECTED	    	= 6;
+	constant int ERR_UPDATE_IN_PROGRESS 	= 7;
+	
+	/*** firmware update **************************************************/
+	
+	structure FirmwareInfo {
+	    int     crc;
+	    string  compiler;
+	    int     compilerVersion;
+	    string  compileDate;
+	    int     version;
+	    int     subVersion;
+	    int     configurationId;
+	    string  updateDate;
+	};
+	
+	/**
+	 * Update G2 peripheral firmware.
+	 *
+	 * @param romcode   1-wire rom code for device identification,
+	 *          	    can be left empty if only one device connected
+	 * @param firmware  Firmware image in TI-TXT format
+	 *
+	 * @return 0	    	    	    if OK
+	 * @return ERR_NO_CONFIG_MODE       if the device is not in factory
+	 *  	    	    	    	    configuration mode
+	 * @return ERR_NO_DEVICE            no device present or wrong romcode
+	 * @return ERR_NO_FIRMWARE_FILE	    if no previously uploaded firmware
+	 *  	    	    	    	    file is present
+	 * @return ERR_FIRMWARE_INVALID	    if previously uploaded firmware file
+	 *                                  is invalid
+	 * @return ERR_UPDATE_IN_PROGRESS   if firmware update is already in
+	 *  	    	    	    	    progress
+	 */
+	int updateFirmware(in string romcode, in string firmware);
+	int updateFirmwarePos(in vector<PosElement> position, in string firmware);
+	
+	/**
+	 * Read G2 peripheral device firmware information
+	 *
+	 * @param romcode   1-wire rom code for device identification,
+	 *          	    can be left empty if only one device connected
+	 * @param info	    the firmware information
+	 *
+	 * @return 0	    	    	    if OK
+	 * @return ERR_NO_DEVICE            no device present or wrong romcode
+	 * @return ERR_FIRMWARE_INVALID	    if firmware information invalid
+	 * @return ERR_UPDATE_IN_PROGRESS   if firmware update is in progress
+	 */
+	int getFirmwareInfo(in string romcode, out FirmwareInfo info);
+	int getFirmwareInfoPos(in vector<PosElement> position,
+			       out FirmwareInfo info);
+	
+	/*** configuration ****************************************************/
+	
+	enumeration ConfigurationSpace {
+	    HARDWARE,	///< HW-specific configuration data
+	    FUNCTION,	///< Function-specific configuration data
+	    FIRMWARE,	///< Firmware-specific configuration data
+	    RESERVED	///< Reserved, Development only
+	};
+	
+	/**
+	 * Read the configuration space of a G2 peripheral device.
+	 *
+	 * @param romcode   1-wire rom code for device identification,
+	 *          	    can be left empty if only one device connected
+	 * @param cs  	    the configuration space identifier
+	 *
+	 * @return 0	    	    	if OK
+	 * @return ERR_NO_CONFIG_MODE   if the device is not in factory 
+	 *  	    	    	    	configuration mode
+	 * @return ERR_NO_DEVICE        no device present or wrong romcode
+	 */
+	int readConfigurationSpace(in string romcode, 
+	    	    	    	   in ConfigurationSpace cs,
+				   out vector<byte> cfg);
+	int readConfigurationSpacePos(in vector<PosElement> position,
+				      in ConfigurationSpace cs,
+				      out vector<byte> cfg);
+	
+	/**
+	 * Erase the configuration space of a G2 peripheral device.
+	 *
+	 * @param romcode   1-wire rom code for device identification,
+	 *          	    can be left empty if only one device connected
+	 * @param cs  	    the configuration space identifier
+	 *
+	 * @return 0	    	    	if OK
+	 * @return ERR_NO_CONFIG_MODE   if the device is not in factory
+	 *  	    	    	    	configuration mode
+	 * @return ERR_NO_DEVICE        no device present or wrong romcode
+	 */
+	int eraseConfigurationSpace(in string romcode,
+				    in ConfigurationSpace cs);
+	int eraseConfigurationSpacePos(in vector<PosElement> position,
+				       in ConfigurationSpace cs);
+	
+	/**
+	 * Write a complete configuration space of a G2 peripheral device.
+	 *
+	 * @param romcode   1-wire rom code for device identification,
+	 *          	    can be left empty if only one device connected
+	 * @param cs  	    the configuration space identifier
+	 * @param cfg	    the configuration bytes
+	 *
+	 * @return 0	    	    	if OK
+	 * @return ERR_NO_CONFIG_MODE   if the device is not in factory 
+	 *  	    	    	    	configuration mode
+	 * @return ERR_NO_DEVICE        no device present or wrong romcode
+	 * @return ERR_PROTECTED    	if configuration space is not writeable
+	 */
+	int writeConfigurationSpace(in string romcode, 
+	    	    	    	    in ConfigurationSpace cs,
+				    in vector<byte> cfg);
+	int writeConfigurationSpacePos(in vector<PosElement> position,
+				       in ConfigurationSpace cs,
+				       in vector<byte> cfg);
+	
+	/*** register access **************************************************/
+	
+	/**
+	 * Read the registers of a G2 peripheral device.
+	 *
+	 * @param romcode   1-wire rom code for device identification,
+	 *          	    can be left empty if only one device connected
+	 * @param address   the address of (first) register to read from
+	 * @param count     the number of registers to read
+	 * @param data	    the register data being read out
+	 *
+	 * @return 0	    	    	if OK
+	 * @return ERR_NO_CONFIG_MODE   if the device is not in factory 
+	 *  	    	    	    	configuration mode
+	 * @return ERR_NO_DEVICE        no device present or wrong romcode
+	 * @return ERR_INVALID_PARAMS   if address or count ouf of bounds
+	 */
+	int readRegisters(in string romcode,
+	    	    	  in int address, in int count,
+			  out vector<byte> data);
+	int readRegistersPos(in vector<PosElement> position,
+			     in int address, in int count,
+			     out vector<byte> data);
+	
+	/**
+	 * Write the registers of a G2 peripheral device.
+	 *
+	 * @param romcode   1-wire rom code for device identification,
+	 *          	    can be left empty if only one device connected
+	 * @param address   the address of (first) register to write to
+	 * @param data	    the register data to be writen
+	 *
+	 * @return 0	    	    	if OK
+	 * @return ERR_NO_CONFIG_MODE   if the device is not in factory 
+	 *  	    	    	    	configuration mode
+	 * @return ERR_NO_DEVICE        no device present or wrong romcode
+	 * @return ERR_INVALID_PARAMS   if address or count ouf of bounds
+	 * @return ERR_PROTECTED    	if registers are not writeable
+	 */
+	int writeRegisters(in string romcode,
+	    	    	   in int address, in vector<byte> data);
+	int writeRegistersPos(in vector<PosElement> position,
+			      in int address, in vector<byte> data);
+	
+	/**
+	 * Set single (masked) bits of a G2 peripheral device register.
+	 *
+	 * @param romcode   1-wire rom code for device identification,
+	 *          	    can be left empty if only one device connected
+	 * @param address   the address of register to set bits of
+	 * @param mask	    the bitmask to apply (set bit: 1, don't set bit 0)
+	 * @param bits	    the bit vailues to set
+	 *
+	 * @return 0	    	    	if OK
+	 * @return ERR_NO_CONFIG_MODE   if the device is not in factory
+	 *  	    	    	    	configuration mode
+	 * @return ERR_NO_DEVICE        no device present or wrong romcode
+	 * @return ERR_INVALID_PARAMS   if address or count ouf of bounds
+	 * @return ERR_PROTECTED    	if registers are not writeable
+	 */
+	int writeRegisterBits(in string romcode,
+			      in int address, in byte mask, in byte bits);
+	int writeRegisterBitsPos(in vector<PosElement> position,
+			         in int address, in byte mask, in byte bits);
+	
+	/*** utils ************************************************************/
+	
+	enumeration ResetMethod {
+	    BROWNOUT,	///< reset triggered instantly by firmware
+	    WATCHDOG	///< sensor is halted until watchdog triggers reset
+	};
+	
+	/**
+	 * Reset a G2 peripheral device.
+	 *
+	 * @param romcode   1-wire rom code for device identification,
+	 *          	    can be left empty if only one device connected
+	 * @param method    the reset method to be executed
+	 *
+	 * @return 0	    	    	if OK
+	 * @return ERR_NO_DEVICE        no device present or wrong romcode
+	 */
+	int reset(in string romcode, in ResetMethod method);
+	int resetPos(in vector<PosElement> position, in ResetMethod method);
+    };
+}
+
+#endif /* !__PERIPHERAL_G2_PRODUCTION_IDL__ */

@@ -1,0 +1,17 @@
+
+#ifndef __IDL_EVENT_IDL__
+#define __IDL_EVENT_IDL__
+
+/** Basic IDL definitions */
+module idl {
+
+    /** Common base for all events */
+    valueobject Event {
+
+	Object source; ///< IDL object that originated the event
+
+    };
+
+}
+
+#endif

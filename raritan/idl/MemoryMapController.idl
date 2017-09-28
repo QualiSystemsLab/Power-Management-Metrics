@@ -1,0 +1,33 @@
+#include "Controller.idl"
+
+/** PDU Model */
+module pdumodel {
+
+    /** Memory map controller */
+    interface MemoryMapController_3_0_0 extends Controller_3_0_0 {
+    	
+	/**
+	 * Read a given number of bytes from an address
+	 *
+	 * @param address  The address to read
+	 * @param size  The number of bytes to read
+	 * @param memory  The vector with the read bytes
+         *
+	 * @return 0 if OK
+	 * @return an error code otherwise
+	 */
+	int readMemory(in int address, in int size, out vector<byte> memory);
+	/**
+	 * Write bytes to an address
+	 *
+	 * @param address  The address to write
+	 * @param memory   The vector with the bytes to write
+         *
+	 * @return 0 if OK
+	 * @return an error code otherwise
+	 */
+	int writeMemory(in int address, in vector<byte> memory);
+
+    };
+
+}

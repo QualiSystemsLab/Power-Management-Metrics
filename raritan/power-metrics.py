@@ -70,9 +70,13 @@ class PowerMetrics(object):
 
             # self.send_email('Error connecting to CloudShell', msg)
 
+    # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     def _get_tstamp(self):
         return time.strftime('%Y-%m-%d %H:%M:%S')
 
+    # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     def get_pdu_data(self):
         self.pdu_list = {}
         self.pduPassword = {}
@@ -95,6 +99,8 @@ class PowerMetrics(object):
                     self.pduOutlet_to_dev.update({pdu.Address + "/" + rootOutletName: "none"})
         return self.pdu_list, self.pduOutlet_to_dev, self.pduPassword
 
+    # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     def get_globals_attribs(self):
         found = self.cs_session.FindResources(resourceFamily="Pool", resourceModel="Config Set Pool",
                                               showAllDomains=True)
@@ -103,6 +109,8 @@ class PowerMetrics(object):
             gresDetails = self.cs_session.GetResourceDetails(gres.Name)
             return gresDetails.ResourceAttributes
 
+    # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     def main(self):
         self.errormessage = ''
         print self.start_time
@@ -264,6 +272,8 @@ class PowerMetrics(object):
         print "Done @ %s    Closing database." % (datetime.datetime.utcnow().isoformat())
         self.qualienv.close()
 
+    # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     def putpdu(self):
         # COLUMNS in table
         #  1 [pdu-ip] [varchar](16) NOT NULL,
@@ -316,6 +326,8 @@ class PowerMetrics(object):
             self.emailalert('Power Metrics Fault (1)', self.errormessage)
             raise
 
+    # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     def putoutlets(self):
         # COLUMNS in table
         # 1 pdu-id
@@ -390,6 +402,8 @@ class PowerMetrics(object):
             self.emailalert('Power Metrics Fault (1)', self.errormessage)
             raise
 
+    # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     def get_attribute(self, gresattribs, attribute_name):
         attribute_name_lower = attribute_name.lower()
         for attribute in gresattribs:
@@ -401,6 +415,8 @@ class PowerMetrics(object):
                     return attribute.Value
         raise CloudShellAPIError("Attribute: '" + attribute_name + "' not found")
 
+    # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     def emailalert(self, subject, body, ishtml=False):
         try:
             gresattribs = self.get_globals_attribs()
@@ -438,7 +454,8 @@ class PowerMetrics(object):
             logging.info("ERROR Failed to send email(2) " + ex.message)
             return "ERROR Failed to send email(2) " + ex.message
 
-
+# -------------------------------------------------------------------------
+# -------------------------------------------------------------------------
 if __name__ == '__main__':
     pm = PowerMetrics()
     pm.main()

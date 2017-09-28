@@ -1,0 +1,26 @@
+/**
+ * USB Ports
+ */
+module usb {
+
+    /** USB device information */
+    structure UsbDevice {
+	int bus;	///< Bus number
+	int device;	///< Device address
+	int vendorId;	///< Vendor ID
+	int productId;	///< Product ID
+    };
+
+    /** USB interface */
+    interface Usb {
+
+	/**
+	 * Get a list of USB devices connected to the host port.
+	 *
+	 * @param usbDevices  Result: List of discovered devices
+	 */
+	void getDevices(out vector<UsbDevice> usbDevices);
+
+    };
+
+}

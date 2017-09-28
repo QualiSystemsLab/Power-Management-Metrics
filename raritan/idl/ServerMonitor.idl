@@ -1,0 +1,113 @@
+/** Server Monitor */
+module servermon {
+
+    /** Server Monitor Interface */
+    interface ServerMonitor_2_0_0 {
+
+	/**
+	 * Server Reachability State
+	 */
+	enumeration ServerReachability {
+	    WAITING,				///< Waiting for reliable connection
+	    REACHABLE,				///< Server is up and running
+	    UNREACHABLE,			///< No response from server
+	    ERROR				///< Error pinging server (e.g. DNS lookup failure)
+	};
+
+	/**
+	 * Server Reachability Settings
+	 */
+	structure ServerSettings {
+	    string host;			///< Server hostname/IP address
+	    boolean enabled;			///< Pinging enabled
+	    int pingInterval;			///< Wait time after successful ping
+	    int retryInterval;			///< Wait time after unsuccessful ping
+	    int activationCount;		///< Minimum number of successful pings to enable feature
+	    int failureCount;			///< Number of unsuccessful pings to consider server down
+	    int resumeDelay;			///< Wait time before resuming pinging
+	    int resumeCount;			///< Number of resumes before going back to WAITING state
+	};
+
+	/**
+	 * Server Reachability Status
+	 */
+	structure ServerStatus {
+	    ServerReachability reachable;	///< Reachability state
+	    time lastRequest;			///< Timestamp of last request sent
+	    time lastResponse;			///< Timestamp of last response received
+	    int requests;			///< Number of requests sent
+	    int responses;			///< Number of responses received
+	    int failures;			///< Number of consecutive failed pings
+	    int resumes;			///< Number of resumes
+	};
+
+	/**
+	 * Server Entry
+	 */
+	structure Server {
+	    ServerSettings settings;		///< Server settings
+	    ServerStatus status;		///< Server status
+	};
+
+	constant int ERR_NO_SUCH_ID		= 1; ///< No such ID
+	constant int ERR_INVALID_SETTINGS	= 2; ///< Invalid settings
+	constant int ERR_DUPLICATE_HOSTNAME	= 3; ///< Duplicate hostname
+	constant int ERR_MAX_SERVERS_REACHED	= 4; ///< Maximum number of server entries
+
+	/**
+	 * Add a new server entry.
+	 *
+	 * @param id        New entry id, automatically assigned
+	 * @param settings  New server settings
+	 *
+	 * @return 0 if OK
+	 * @return 2 if the settings are invalid
+	 * @return 3 if an entry for the given hostname exists
+	 * @return 4 if the maximum number of servers is reached
+	 */
+	int addServer(out int id, in ServerSettings settings);
+
+	/**
+	 * Modify an existing server entry.
+	 *
+	 * @param id        Entry id
+	 * @param settings  New settings
+	 *
+	 * @return 0 if OK
+	 * @return 1 if the entry does not exist
+	 * @return 2 if the settings are invalid
+	 * @return 3 if an entry for the given hostname exists
+	 */
+	int modifyServer(in int id, in ServerSettings settings);
+
+	/**
+	 * Delete a server entry.
+	 *
+	 * @param id        Entry id
+	 *
+	 * @return 0 if OK
+	 * @return 1 if the entry does not exist
+	 */
+	int deleteServer(in int id);
+
+	/**
+	 * Retrieve a server entry (settings and status).
+	 *
+	 * @param server    Server settings and status
+	 * @param id        Entry id
+	 *
+	 * @return 0 if OK
+	 * @return 1 if the entry does not exist
+	 */
+	int getServer(out Server server, in int id);
+
+	/**
+	 * Retrieve a list of server entries (settings and status).
+	 *
+	 * @return Server list
+	 */
+	map<int, Server> listServers();
+
+    };
+
+}

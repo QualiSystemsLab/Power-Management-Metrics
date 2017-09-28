@@ -1,0 +1,127 @@
+Well-known URI                                                                  Interface                      File/Alias
+--------------                                                                  ---------                      ----------
+/model/inlet									[alias for]			/model/pdu/0/inlet
+/model/ocp									[alias for]			/model/pdu/0/ocp
+/model/outlet									[alias for]			/model/pdu/0/outlet
+/model/pdu/[PDU ID 0=standalone, 1=master (unused), 2-x=slave ID (unused)]	pdumodel.Pdu			Pdu.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx 0-based]					pdumodel.Inlet			Inlet.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/activeEnergy				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/activePower				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/apparentEnergy				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/apparentPower				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/current					sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/displacementPowerFactor			sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/lineFrequency				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/peakCurrent				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/phaseAngle				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/pole/[pole idx 0-based]/activeEnergy	sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/pole/[pole idx 0-based]/activePower	sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/pole/[pole idx 0-based]/apparentEnergy	sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/pole/[pole idx 0-based]/apparentPower	sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/pole/[pole idx 0-based]/current		sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/pole/[pole idx 0-based]/displacementPowerFactor	sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/pole/[pole idx 0-based]/peakCurrent	sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/pole/[pole idx 0-based]/phaseAngle	sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/pole/[pole idx 0-based]/powerFactor	sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/pole/[pole idx 0-based]/reactivePower	sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/pole/[pole idx 0-based]/voltage		sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/pole/[pole idx 0-based]/voltageLN		sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/powerFactor				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/powerQuality				sensors.StateSensor		StateSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/reactivePower				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/residualCurrent				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/residualCurrentStatus			pdumodel.ResidualCurrentStateSensor	ResidualCurrentStateSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/surgeProtectorStatus			sensors.StateSensor		StateSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/unbalancedCurrent				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/inlet/[inlet idx]/voltage					sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx 0-based]			pdumodel.OverCurrentProtector	OverCurrentProtector.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/activeEnergy		sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/activePower		sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/apparentEnergy		sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/apparentPower		sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/current			sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/displacementPowerFactor	sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/lineFrequency		sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/maximumCurrent		sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/peakCurrent		sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/phaseAngle			sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/powerFactor		sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/reactivePower		sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/voltage			sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/ocp/[over current protector idx]/trip			sensors.StateSensor		StateSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx 0-based]					pdumodel.Outlet			Outlet.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/activeEnergy				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/activePower				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/apparentEnergy				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/apparentPower				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/current					sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/displacementPowerFactor			sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/lineFrequency				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/maximumCurrent				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/outletState				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/peakCurrent				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/phaseAngle				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/powerFactor				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/reactivePower				sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/unbalancedCurrent			sensors.NumericSensor		NumericSensor.idl
+/model/pdu/[PDU ID]/outlet/[outlet idx]/voltage					sensors.NumericSensor		NumericSensor.idl
+/model/peripheraldevicemanager							peripheral.DeviceManager	PeripheralDeviceManager.idl
+/model/peripheraldeviceslot/[slot idx 0-based]					peripheral.DeviceSlot		PeripheralDeviceSlot.idl
+/model/pmc									pdumodel.PowerMeterController	PowerMeterController.idl
+/model/unit									pdumodel.Unit			Unit.idl
+/model/ade/[ADE ID]								pdumodel.Ade			Ade.idl
+/model/bcm									pdumodel.Bcm			Bcm.idl
+/model/assetstriplogger								assetmgrmodel.AssetStripLogger	AssetStripLogger.idl
+/auth										auth.AuthManager		AuthManager.idl
+/auth/currentUser								[alias for]			/auth/user/[name of authenticated user sending request]
+/auth/ldap									auth.LdapManager		LdapManager.idl
+/auth/radius									auth.RadiusManager		RadiusManager.idl
+/auth/role									usermgmt.RoleManager		RoleManager.idl
+/auth/role/[role name]								usermgmt.Role			Role.idl
+/auth/user									usermgmt.UserManager		UserManager.idl
+/auth/user/[user name]								usermgmt.User			User.idl
+/bulk										bulkrpc.BulkRequest		BulkRequest.idl
+/bulkcfg									bulkcfg.BulkConfiguration	BulkConfiguration.idl
+/cardreader									smartcard.CardReaderManager	CardReaderManager.idl
+/cascading									cascading.Cascading		Cascading.idl
+/datetime									datetime.DateTime		DateTime.idl
+/debuglog									logging.DebugLog		DebugLog.idl
+/diag										diag.DiagLogSettings		DiagLogSettings.idl
+/display									display.DisplayControl		DisplayControl.idl
+/energywise									cew.EnergyWiseManager		EnergyWiseManager.idl
+/event_engine									event.Engine			EventEngine.idl
+/event_engine/alarms								event.AlarmManager		AlarmManager.idl
+/event_engine/timer_events							event.TimerEventManager		TimerEventManager.idl
+/eventlog									logging.EventLog		EventLog.idl
+/eventservice									event.Service			EventService.idl
+/firmware									firmware.Firmware		Firmware.idl
+/cgi-bin/fwupdate_progress.cgi							firmware.UpdateStatus		FirmwareUpdateStatus.idl
+/fitness									fitness.Fitness			Fitness.idl
+/lhx										lhx.Support			LhxSupport.idl
+/luaservice									luaservice.Manager		LuaService.idl
+/modbus										devsettings.Modbus		Modbus.idl
+/modelpush									modelpush.ModelPush		ModelPush.idl
+/net										net.Net				Net.idl
+/net/diag									net.Diagnostics			Diagnostics.idl
+/ns										jsonrpc.NameService		NameService.idl
+/production									production.Production		Production.idl
+/production/g2_dev								peripheral.G2Production		PeripheralG2Production.idl
+/res_mon									res_mon.ResMon			ResMon.idl
+/security									security.Security		Security.idl
+/security/serviceauthorization							security.ServiceAuthorization	ServiceAuthorization.idl
+/serial										serial.PortDispatcher		PortDispatcher.idl
+/serial/<port name>								serial.SerialPort		SerialPort.idl
+/server_ssl_cert								cert.ServerSSLCert		ServerSSLCert.idl
+/servermon									servermon.ServerMonitor		ServerMonitor.idl
+/session									session.SessionManager		SessionManager.idl
+/smtp										devsettings.Smtp		Smtp.idl
+/snmp										devsettings.Snmp		Snmp.idl
+/storage_mgr									webcam.StorageManager		StorageManager.idl
+/system										sys.System			System.idl
+/test/Ethernet									test.Ethernet			testrpc.idl
+/test/Unit									test.Unit			TestUnit.idl
+/test/Usb									usb.Usb				Usb.idl
+/webcam_mgr									webcam.WebcamManager		WebcamManager.idl
+/webcam_mgr/webcam/[webcam ID]							webcam.Webcam			Webcam.idl
+/wlanlog									logging.WlanLog			WlanLog.idl
+/zeroconf									devsettings.Zeroconf		Zeroconf.idl

@@ -1,0 +1,66 @@
+#ifndef __PDUMODEL_POLE_IDL__
+#define __PDUMODEL_POLE_IDL__
+
+#include <NumericSensor.idl>
+
+/**
+ * PDU Model
+ */
+module pdumodel {
+
+    /** Power line */
+    enumeration PowerLine_2_0_0 {
+	L1,				///< Line 1
+	L2,				///< Line 2
+	L3,				///< Line 3
+	NEUTRAL,			///< Neutral
+	EARTH				///< Earth
+    };
+
+    /** An inlet or outlet pole */
+    structure Pole_4_0_0 {
+	string label;                                        ///< %Pole label
+	PowerLine_2_0_0 line;                                ///< Power line
+	int nodeId;                                          ///< Circuit node id
+	sensors.NumericSensor_4_0_1 voltage;                 ///< RMS voltage sensor, L-L
+	sensors.NumericSensor_4_0_1 voltageLN;               ///< RMS voltage sensor, L-N
+	sensors.NumericSensor_4_0_1 current;                 ///< RMS current sensor
+	sensors.NumericSensor_4_0_1 peakCurrent;             ///< Peak current sensor
+	sensors.NumericSensor_4_0_1 activePower;             ///< Active power sensor
+	sensors.NumericSensor_4_0_1 reactivePower;           ///< Reactive power sensor
+	sensors.NumericSensor_4_0_1 apparentPower;           ///< Apparent power sensor
+	sensors.NumericSensor_4_0_1 powerFactor;             ///< Power factor sensor
+	sensors.NumericSensor_4_0_1 phaseAngle;              ///< Phase angle sensor
+	sensors.NumericSensor_4_0_1 displacementPowerFactor; ///< Displacement power factor sensor
+	sensors.NumericSensor_4_0_1 activeEnergy;            ///< Active energy sensor
+	sensors.NumericSensor_4_0_1 apparentEnergy;          ///< Apparent energy sensor
+    };
+
+    /** for OCP */
+    structure DoublePole_4_0_0 {
+	string label;				   ///< %Pole label
+	PowerLine_2_0_0 line;			   ///< Power line
+	int inNodeId;				   ///< Upstream (inlet-side) circuit node id
+	int outNodeId;				   ///< Downstream (outlet-side) circuit node id
+	sensors.NumericSensor_4_0_1 voltage;		   ///< RMS voltage sensor, L-L
+	sensors.NumericSensor_4_0_1 voltageLN;		   ///< RMS voltage sensor, L-N
+	sensors.NumericSensor_4_0_1 current;		   ///< RMS current sensor
+	sensors.NumericSensor_4_0_1 peakCurrent;	   ///< Peak current sensor
+	sensors.NumericSensor_4_0_1 activePower;	   ///< Active power sensor
+	sensors.NumericSensor_4_0_1 apparentPower;	   ///< Apparent power sensor
+	sensors.NumericSensor_4_0_1 powerFactor;	   ///< Power factor sensor
+	sensors.NumericSensor_4_0_1 activeEnergy;	   ///< Active energy sensor
+	sensors.NumericSensor_4_0_1 apparentEnergy;	   ///< Apparent energy sensor
+    };
+
+    /** A pole that can select one of multiple inputs */
+    structure ThrowPole_2_0_0 {
+	string label;				   ///< %Pole label
+	PowerLine_2_0_0 line;			   ///< Power line
+	vector<int> inNodeIds;			   ///< Upstream node ids
+	int outNodeId;				   ///< Downstream node id
+    };
+
+}
+
+#endif
